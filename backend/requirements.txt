@@ -1,0 +1,8 @@
+flask
+pymongo
+python-dotenv
+firebase-admin
+requests
+google-cloud-vision
+gunicorn
+flask-cors

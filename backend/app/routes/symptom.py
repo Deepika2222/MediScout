@@ -44,7 +44,49 @@ def suggest_medicine():
         
     except Exception as e:
         print(f"Gemini Error: {e}")
-        # Fallback
-        return jsonify({"suggestions": [
-            {"medicine": "Consult Doctor", "usage": "N/A", "warning": "AI Service Unavailable", "details": str(e)}
-        ]})
+        
+        # Rule-based Fallback
+        symptom_lower = symptom_text.lower()
+        fallback_suggestions = []
+        
+        if 'fever' in symptom_lower or 'temp' in symptom_lower:
+            fallback_suggestions.append({
+                "medicine": "Paracetamol (Dolo 650)",
+                "usage": "1 tablet every 6 hours after food.",
+                "warning": "Do not exceed 4g per day.",
+                "details": "Common antipyretic for fever reduction."
+            })
+        
+        if 'headache' in symptom_lower or 'pain' in symptom_lower:
+            fallback_suggestions.append({
+                "medicine": "Ibuprofen (Brufen 400)",
+                "usage": "1 tablet with food when needed.",
+                "warning": "Avoid if you have acidity or ulcers.",
+                "details": "NSAID for pain relief and inflammation."
+            })
+            
+        if 'cold' in symptom_lower or 'runny nose' in symptom_lower:
+            fallback_suggestions.append({
+                "medicine": "Cetirizine (Cetzine)",
+                "usage": "1 tablet at night.",
+                "warning": "May cause drowsiness. Avoid driving.",
+                "details": "Antihistamine for allergy and cold symptoms."
+            })
+            
+        if 'cough' in symptom_lower:
+            fallback_suggestions.append({
+                "medicine": "Dextromethorphan Syrup",
+                "usage": "10ml every 8 hours.",
+                "warning": "May cause dizziness.",
+                "details": "Cough suppressant for dry cough."
+            })
+            
+        if not fallback_suggestions:
+            fallback_suggestions.append({
+                "medicine": "Consult Doctor",
+                "usage": "N/A",
+                "warning": "Symptoms not recognized.",
+                "details": "Please visit a nearby clinic for proper diagnosis."
+            })
+            
+        return jsonify({"suggestions": fallback_suggestions})

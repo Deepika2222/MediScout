@@ -94,12 +94,17 @@ function displaySymptomResults(suggestions) {
     }
 
     symptomResults.innerHTML = suggestions.map(item => `
-        <div class="card">
-            <h3>${item.medicine || item}</h3>
-            <p><strong>Usage:</strong> ${item.usage || 'Consult pharmacist'}</p>
-            <p class="text-danger" style="font-size: 0.9rem; margin-top: 0.5rem;">
-                ⚠️ ${item.warning || 'Read label carefully'}
-            </p>
+        <div class="card" style="border-left: 4px solid var(--primary-color);">
+            <h3>💊 ${item.medicine || item}</h3>
+            <div style="margin-top: 10px;">
+                <p><strong>📝 Usage:</strong> ${item.usage || 'Consult pharmacist'}</p>
+                ${item.details ? `<p style="margin-top: 5px;"><strong>ℹ️ Details:</strong> ${item.details}</p>` : ''}
+                <div style="margin-top: 10px; padding: 10px; background-color: #fff3cd; border-radius: 5px;">
+                    <p class="text-danger" style="font-size: 0.9rem; margin: 0;">
+                        <strong>⚠️ Warning:</strong> ${item.warning || 'Read label carefully'}
+                    </p>
+                </div>
+            </div>
         </div>
     `).join('');
 }

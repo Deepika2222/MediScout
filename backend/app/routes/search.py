@@ -57,6 +57,26 @@ def search_medicine():
             "lat": 12.9719,
             "lon": 77.5937,
             "link": f"https://www.netmeds.com/catalogsearch/result?q={query}"
+        },
+        {
+            "name": f"{query.capitalize()} Capsule",
+            "pharmacy": "Wellness Forever",
+            "price": 45,
+            "available": True,
+            "address": "Indiranagar, Bangalore",
+            "lat": 12.9698,
+            "lon": 77.6366,
+            "link": f"https://wellnessforever.com/search?q={query}"
+        },
+        {
+            "name": f"{query.capitalize()} 250mg",
+            "pharmacy": "Frank Ross Pharmacy",
+            "price": 15,
+            "available": True,
+            "address": "Kolkata (Online)",
+            "lat": 22.5726,
+            "lon": 88.3639,
+            "link": f"https://frankrosspharmacy.com/search?q={query}"
         }
     ]
     

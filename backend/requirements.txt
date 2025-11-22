@@ -6,3 +6,4 @@ requests
 google-cloud-vision
 gunicorn
 flask-cors
+Flask-PyMongo

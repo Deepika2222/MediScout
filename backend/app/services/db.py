@@ -1,13 +1,9 @@
-from flask_pymongo import PyMongo
-from flask import current_app, g
+from flask_sqlalchemy import SQLAlchemy
 
-def get_db():
-    if 'db' not in g:
-        mongo = PyMongo(current_app)
-        g.db = mongo.db
-    return g.db
+db = SQLAlchemy()
 
 def init_db(app):
-    app.config["MONGO_URI"] = app.config.get("MONGO_URI")
-    mongo = PyMongo(app)
-    return mongo
+    db.init_app(app)
+    with app.app_context():
+        db.create_all() # Create tables
+    return db

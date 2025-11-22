@@ -2,13 +2,19 @@ from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
 from app.services.firebase_service import init_firebase
+from config import Config
 import os
 
 load_dotenv()
 
 def create_app():
     app = Flask(__name__)
+    app.config.from_object(Config)
     CORS(app) # Enable CORS for all routes
+    
+    from app.services.db import init_db
+    init_db(app)
+    
     init_firebase()
     
     # Register Blueprints

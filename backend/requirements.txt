@@ -6,4 +6,5 @@ requests
 google-cloud-vision
 gunicorn
 flask-cors
-Flask-PyMongo
+Flask-SQLAlchemy
+google-generativeai

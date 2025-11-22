@@ -221,13 +221,20 @@ function displayMedicineResults(results) {
             <p class="${item.available ? 'text-success' : 'text-danger'}">
                 ${item.available ? 'Available' : 'Out of Stock'}
             </p>
-            <button 
-                class="btn btn-secondary" 
-                style="margin-top: 1rem; font-size: 0.9rem;"
-                onclick="showOnMap(${item.lat || 12.9716}, ${item.lon || 77.5946}, '${item.pharmacy || 'Pharmacy'}', '${item.address || 'Unknown Address'}')"
-            >
-                View on Map
-            </button>
+            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                <button 
+                    class="btn btn-secondary" 
+                    style="font-size: 0.9rem; flex: 1;"
+                    onclick="showOnMap(${item.lat || 12.9716}, ${item.lon || 77.5946}, '${item.pharmacy || 'Pharmacy'}', '${item.address || 'Unknown Address'}')"
+                >
+                    View on Map
+                </button>
+                ${item.link ? `
+                <a href="${item.link}" target="_blank" class="btn btn-primary" style="font-size: 0.9rem; flex: 1; text-decoration: none; line-height: 1.5;">
+                    Buy Now ↗
+                </a>
+                ` : ''}
+            </div>
         </div>
     `).join('');
 }

@@ -5,6 +5,8 @@ load_dotenv()
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
-    MONGO_URI = os.environ.get('MONGO_URI') or 'mongodb://localhost:27017/mediscout'
-    GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///mediscout.db'
+    # GOOGLE_MAPS_API_KEY removed as per request (Using Leaflet)
     FIREBASE_CREDENTIALS = os.environ.get('FIREBASE_CREDENTIALS')
+    # Using hardcoded key for demo purposes as per user input, or env var
+    GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY') or 'AIzaSyBLnx9L5UACh6wSP1opiSVVBSDEyChfHIQ'

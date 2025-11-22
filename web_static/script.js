@@ -130,3 +130,104 @@ function saveRecentSearch(query) {
         localStorage.setItem('recentSearches', JSON.stringify(searches));
     }
 }
+
+// --- Leaflet Map Integration ---
+
+let mapInstance = null;
+const mapModal = document.getElementById('map-modal');
+const closeModalBtn = document.querySelector('.close-modal');
+
+// Close Modal Logic
+if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', () => {
+        mapModal.classList.add('hidden');
+    });
+}
+
+// Close on click outside
+window.addEventListener('click', (e) => {
+    if (e.target === mapModal) {
+        mapModal.classList.add('hidden');
+    }
+});
+
+// Function to Show Map
+function showOnMap(lat, lon, name, address) {
+    // 1. Show Modal
+    if (mapModal) {
+        mapModal.classList.remove('hidden');
+        document.getElementById('map-title').innerText = name;
+    }
+
+    // 2. Initialize Map (or reset)
+    if (mapInstance) {
+        mapInstance.remove(); // Clear old map instance
+    }
+
+    // 3. Create new Map
+    // Use a slight timeout to ensure modal is visible and container has dimensions
+    setTimeout(() => {
+        mapInstance = L.map('map').setView([lat, lon], 15);
+
+        // 4. Add OpenStreetMap Tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(mapInstance);
+
+        // 5. Add Marker
+        L.marker([lat, lon]).addTo(mapInstance)
+            .bindPopup(`<b>${name}</b><br>${address}`)
+            .openPopup();
+    }, 100);
+}
+
+// Update Mock Data to include Lat/Lon for demo
+function displayMockMedicineResults(query) {
+    const mockData = [
+        {
+            name: query,
+            pharmacy: 'Apollo Pharmacy',
+            price: '$12',
+            available: true,
+            address: 'MG Road, Bangalore',
+            lat: 12.9716,
+            lon: 77.5946
+        },
+        {
+            name: query + ' Extra',
+            pharmacy: 'MedPlus',
+            price: '$15',
+            available: false,
+            address: 'Indiranagar, Bangalore',
+            lat: 12.9784,
+            lon: 77.6408
+        },
+    ];
+    displayMedicineResults(mockData);
+}
+
+// Update Display Logic to use showOnMap
+function displayMedicineResults(results) {
+    if (!results || results.length === 0) {
+        resultsContainer.innerHTML = '<p class="text-center">No medicines found.</p>';
+        return;
+    }
+
+    resultsContainer.innerHTML = results.map(item => `
+        <div class="card">
+            <h3>${item.name}</h3>
+            <p><strong>Pharmacy:</strong> ${item.pharmacy || 'Unknown'}</p>
+            <p><strong>Price:</strong> ${item.price || 'N/A'}</p>
+            <p class="${item.available ? 'text-success' : 'text-danger'}">
+                ${item.available ? 'Available' : 'Out of Stock'}
+            </p>
+            <button 
+                class="btn btn-secondary" 
+                style="margin-top: 1rem; font-size: 0.9rem;"
+                onclick="showOnMap(${item.lat || 12.9716}, ${item.lon || 77.5946}, '${item.pharmacy || 'Pharmacy'}', '${item.address || 'Unknown Address'}')"
+            >
+                View on Map
+            </button>
+        </div>
+    `).join('');
+}

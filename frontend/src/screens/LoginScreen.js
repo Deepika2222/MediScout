@@ -12,7 +12,7 @@ const LoginScreen = ({ navigation }) => {
             await login(email, password);
             // Navigation is handled by the AppNavigator based on auth state usually, 
             // but for now we might just go back or to Home if not automatically handled.
-            navigation.replace('Home');
+            navigation.replace('Main');
         } catch (error) {
             Alert.alert('Login Failed', error.message);
         }

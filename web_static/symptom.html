@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Symptom Checker - MediScout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🏥 MediScout</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="medicine.html">Find Medicine</a>
+            <a href="symptom.html" class="active">Symptom Checker</a>
+            <a href="about.html">About</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center mb-2">Check Your Symptoms</h1>
+
+        <div class="card" style="max-width: 600px; margin: 0 auto;">
+            <form id="symptom-form">
+                <div style="margin-bottom: 1rem;">
+                    <label for="symptoms">Describe your symptoms:</label>
+                    <textarea id="symptoms" rows="4" placeholder="E.g. I have a headache and mild fever..."
+                        required></textarea>
+                </div>
+                <div style="margin-bottom: 1rem;">
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" placeholder="Enter your age">
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Get Suggestions</button>
+            </form>
+        </div>
+
+        <div id="symptom-results" class="card-grid" style="margin-top: 2rem;">
+            <!-- Results will appear here -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MediScout. Always consult a doctor for serious conditions.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

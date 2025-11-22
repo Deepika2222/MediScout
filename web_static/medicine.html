@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Medicine - MediScout</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="logo">🏥 MediScout</a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="medicine.html" class="active">Find Medicine</a>
+            <a href="symptom.html">Symptom Checker</a>
+            <a href="about.html">About</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1 class="text-center mb-2">Find Your Medicine</h1>
+
+        <div class="search-box">
+            <input type="text" id="medicine-search" placeholder="Enter medicine name (e.g. Paracetamol)...">
+            <button id="search-btn" class="btn btn-primary">Search</button>
+        </div>
+
+        <div id="results-container" class="card-grid">
+            <!-- Results will appear here -->
+            <div class="text-center" style="grid-column: 1/-1; color: #888;">
+                <p>Enter a medicine name to see availability.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MediScout. Always consult a doctor for serious conditions.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
